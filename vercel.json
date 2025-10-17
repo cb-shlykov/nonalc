@@ -4,14 +4,15 @@
       "runtime": "nodejs18.x",
       "maxDuration": 10
     },
-    "cron/sendMessages.js": {
+    "api/cron/sendMessages.js": {
       "runtime": "nodejs18.x",
       "maxDuration": 60
     }
   },
+
   "crons": [
     {
-      "path": "/cron/sendMessages",
+      "path": "/api/cron/sendMessages",
       "schedule": "0 9 * * *"
     }
   ]

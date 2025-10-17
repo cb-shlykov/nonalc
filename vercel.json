@@ -5,8 +5,14 @@
     },
     "cron/sendMessages.js": {
       "runtime": "nodejs20.x",
-      "maxDuration": 60,
-      "cron": "0 9 * * *"
+      "maxDuration": 60
     }
-  }
+  },
+
+  "crons": [
+    {
+      "path": "/cron/sendMessages",
+      "schedule": "0 9 * * *"
+    }
+  ]
 }

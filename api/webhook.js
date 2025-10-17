@@ -1,4 +1,3 @@
-import { json } from "express";
 import { upsertUser } from "../lib/airtable.js";
 import { sendMessage } from "../lib/telegram.js";
 
@@ -11,6 +10,7 @@ export default async function handler(req, res) {
   const chatId = update.message.chat.id;
   const text = (update.message.text || "").trim();
 
+  // ------------------- команды -------------------
   if (text === "/start") {
     await sendMessage(
       chatId,
@@ -29,10 +29,11 @@ export default async function handler(req, res) {
 
   const days = Number(text);
   if (!Number.isNaN(days) && days >= 0) {
-    const today = new Date().toISOString().split("T")[0];
-    const timezone = update.message.from?.language_code || "en";
+    const today = new Date().toISOString().split("T")[0]; // YYYY‑MM‑DD
+    const tz = update.message.from?.language_code || "en";
 
-    await upsertUser(chatId, today, days + 1, timezone);
+    // сохраняем +1, потому что сегодня считается тоже днём
+    await upsertUser(chatId, today, days + 1, tz);
     await sendMessage(
       chatId,
       `✅ Записано: у тебя уже <b>${days + 1}</b> день(дней) без алкоголя!\n🚀 Буду присылать полезные факты каждый день.`
@@ -42,7 +43,7 @@ export default async function handler(req, res) {
 
   await sendMessage(
     chatId,
-    `❓ Я не понял твоё сообщение.\nВведите число дней (например <b>0</b>, <b>7</b>) или используйте /reset.`
+    `❓ Я не понял сообщение.\nВведите число дней (например <b>0</b>, <b>7</b>) или используйте /reset.`
   );
   return res.json({ ok: true });
 }

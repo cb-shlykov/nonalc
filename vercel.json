@@ -1,14 +1,16 @@
 {
   "functions": {
     "api/webhook.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs18.x",
+      "maxDuration": 10
     },
     "cron/sendMessages.js": {
-      "runtime": "nodejs20.x",
+      "runtime": "nodejs18.x",
       "maxDuration": 60
     }
   },
 
+  /*  Расписание (cron)  */
   "crons": [
     {
       "path": "/cron/sendMessages",

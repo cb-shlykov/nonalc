@@ -9,8 +9,6 @@
       "maxDuration": 60
     }
   },
-
-  /*  Расписание (cron)  */
   "crons": [
     {
       "path": "/cron/sendMessages",

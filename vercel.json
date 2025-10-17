@@ -1,0 +1,12 @@
+{
+  "functions": {
+    "api/webhook.js": {
+      "runtime": "nodejs20.x"
+    },
+    "cron/sendMessages.js": {
+      "runtime": "nodejs20.x",
+      "maxDuration": 60,
+      "cron": "0 9 * * *"
+    }
+  }
+}
